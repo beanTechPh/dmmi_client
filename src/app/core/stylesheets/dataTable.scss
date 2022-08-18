@@ -24,12 +24,18 @@
         &.status {
           width: 120px;
         }
+
+        &.price {
+          width: 200px;
+        }
       }
     }
   }
 
   tbody {
     tr {
+      cursor: pointer;
+      
       &:hover {
         background-color: #daf8ff;
       }

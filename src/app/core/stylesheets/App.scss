@@ -51,6 +51,15 @@ h1 {
   font-size: 25px !important;
   font-weight: bold !important;
 }
+
+input:focus, select:focus {
+  box-shadow: none !important;
+}
+
+.mt-15 {
+  margin-top: 15px;
+}
+
 // .btn.btn-primary {
 
 // }

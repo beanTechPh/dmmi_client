@@ -59,4 +59,40 @@
   .table {
     margin-top: 20px;
   }
+
+  #new-order-modal {
+    p.caption {
+      text-align: left;
+      font-size: 11px;
+    }
+
+    #new-order-form {
+      .form-group {
+        textarea {
+          width: 100%;
+          height: 200px;
+          resize: none;
+        }
+      }
+    }
+  }
+
+  #order-details-modal {
+    .group {
+      align-items: center;
+      margin-bottom: 5px;
+
+      .label {
+        font-size: 15px;
+        font-weight: bold;
+        margin-right: 5px;
+        text-align: left;
+      }
+
+      .value {
+        font-size: 15px;
+        text-align: left;
+      }
+    }
+  }
 }
