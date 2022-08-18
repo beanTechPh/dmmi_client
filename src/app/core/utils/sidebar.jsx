@@ -1,8 +1,32 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import '../stylesheets/sidebar.scss';
 
 class SidebarComponent extends Component {
   state = {  } 
+
+  componentDidMount() {
+    var tab = window.location.pathname.split('/')[1]
+    tab = tab === '' || tab === null || tab === undefined ? 'dashboard' : tab
+    document.querySelector(`#sidebar-${tab}`).classList.add('active')
+  }
+
+  sidebarMenuClick = (e) => {
+    var element = e.target 
+
+    while (!element.tagName === "li") {
+      element = element.parentElement
+    }
+
+    var activeElements = document.querySelectorAll("#sidebar li.active")
+    for (let i = 0; i < activeElements.length; i++) {
+      const activeElement = activeElements[i];
+      activeElement.classList.remove('active')
+    }
+
+    element.classList.add('active')
+  }
+
   render() { 
     return (
       <div id="sidebar">
@@ -15,10 +39,12 @@ class SidebarComponent extends Component {
           <div className="label">Company</div>
           <div className="menu">
             <ul>
-              <li className='d-flex'>
-                <img src={require("../images/sidebar/dashboard.png")} alt="" />
-                Profile
-              </li>
+              <Link to={'/company'} onClick={this.sidebarMenuClick}>
+                <li className='d-flex' id='sidebar-company'>
+                  <img src={require("../images/sidebar/dashboard.png")} alt="" />
+                  Profile
+                </li>
+              </Link>
             </ul>
           </div>
         </div>
@@ -27,30 +53,42 @@ class SidebarComponent extends Component {
           <div className="label">Menu</div>
           <div className="menu">
             <ul>
-              <li className='d-flex'>
-                <img src={require("../images/sidebar/dashboard.png")} alt="" />
-                Dashboard
-              </li>
-              <li className='d-flex active'>
-                <img src={require("../images/sidebar/order.png")} alt="" />
-                Orders
-              </li>
-              <li className='d-flex'>
-                <img src={require("../images/sidebar/equipment.png")} alt="" />
-                Equipment
-              </li>
-              <li className='d-flex'>
-                <img src={require("../images/sidebar/inquiry.png")} alt="" />
-                Inquiries
-              </li>
-              <li className='d-flex'>
-                <img src={require("../images/sidebar/quotation.png")} alt="" />
-                Quotations
-              </li>
-              <li className='d-flex'>
-                <img src={require("../images/sidebar/personnel.png")} alt="" />
-                Employees
-              </li>
+              <Link to={'/'} onClick={this.sidebarMenuClick}>
+                <li className='d-flex' id='sidebar-dashboard'>
+                  <img src={require("../images/sidebar/dashboard.png")} alt="" />
+                  Dashboard
+                </li>
+              </Link>
+              <Link to={'/orders'} onClick={this.sidebarMenuClick}>
+                <li className='d-flex' id='sidebar-orders'>
+                  <img src={require("../images/sidebar/order.png")} alt="" />
+                  Orders
+                </li>
+              </Link>
+              <Link to={'/equipments'} onClick={this.sidebarMenuClick}>
+                <li className='d-flex' id='sidebar-equipments'>
+                  <img src={require("../images/sidebar/equipment.png")} alt="" />
+                  Equipment
+                </li>
+              </Link>
+              <Link to={'/inquiries'} onClick={this.sidebarMenuClick}>
+                <li className='d-flex' id='sidebar-inquiries'>
+                  <img src={require("../images/sidebar/inquiry.png")} alt="" />
+                  Inquiries
+                </li>
+              </Link>
+              <Link to={'/quotations'} onClick={this.sidebarMenuClick}>
+                <li className='d-flex' id='sidebar-quotations'>
+                  <img src={require("../images/sidebar/quotation.png")} alt="" />
+                  Quotations
+                </li>
+              </Link>
+              <Link to={'/employees'} onClick={this.sidebarMenuClick}>
+                <li className='d-flex' id='sidebar-employees'>
+                  <img src={require("../images/sidebar/personnel.png")} alt="" />
+                  Employees
+                </li>
+              </Link>
             </ul>
           </div>
         </div>
