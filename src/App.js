@@ -14,6 +14,9 @@ import EquipmentsIndexView from './app/features/equipments/views/indexView';
 import InquiriesIndexView from './app/features/inquiries/views/indexView';
 import QuotationsIndexView from './app/features/quotations/views/indexView';
 import EmployeesIndexView from './app/features/employees/views/indexView';
+import SignInView from './app/features/auth/views/signinView';
+import SignUpView from './app/features/auth/views/signupView';
+import CompanyNewView from './app/features/company/views/newView';
 
 function App() {
   return (
@@ -22,6 +25,10 @@ function App() {
         <Loading />
         <Routes>
           <Route path="*" element={<NotFound />} />
+          <Route path="/sign_in" element={<SignInView />} />
+          <Route path="/sign_up" element={<SignUpView />} />
+          <Route path="/company/new" element={<CompanyNewView />} />
+
           <Route path="/" element={<Layout />} >
             <Route path="" element={<DashboardIndexView />} />
             <Route path="orders" element={<OrdersIndexView />} />

@@ -41,7 +41,7 @@ class SidebarComponent extends Component {
             <ul>
               <Link to={'/company'} onClick={this.sidebarMenuClick}>
                 <li className='d-flex' id='sidebar-company'>
-                  <img src={require("../images/sidebar/dashboard.png")} alt="" />
+                  <img src={require("../images/sidebar/company-profile.png")} alt="" />
                   Profile
                 </li>
               </Link>

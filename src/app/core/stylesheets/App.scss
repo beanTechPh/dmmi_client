@@ -75,6 +75,46 @@ input:focus, select:focus {
   }
 }
 
+.form-group {
+  margin: 5px 10px 5px 10px;
+
+  label {
+    width: 100%;
+    text-align: left;
+    font-weight: bold;
+    margin-bottom: 0;
+    font-size: 12px;
+    color: rgb(87, 87, 87);
+  }
+
+  input[type='text'], input[type='password'], input[type='email'] {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    border-radius: 0;
+    font-size: 15px;
+
+    &:focus-visible {
+      outline: none;
+      border-color: skyblue !important;
+      color: skyblue !important;
+
+      &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: skyblue !important;
+        opacity: 1; /* Firefox */
+      }
+      
+      &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color: skyblue !important;
+      }
+      
+      &::-ms-input-placeholder { /* Microsoft Edge */
+        color: skyblue !important;
+      }
+    }
+  }
+}
+
 .mt-15 {
   margin-top: 15px;
 }
