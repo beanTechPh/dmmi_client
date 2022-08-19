@@ -92,6 +92,36 @@
       .value {
         font-size: 15px;
         text-align: left;
+
+        &.on-process {
+          background-color: orange;
+          padding: 0 10px;
+          border-radius: 10px;
+        }
+
+        &.on-progress {
+          background-color: yellow;
+          padding: 0 10px;
+          border-radius: 10px;
+        }
+
+        &.mobilized {
+          background-color: skyblue;
+          padding: 0 10px;
+          border-radius: 10px;
+        }
+
+        &.delivered {
+          background-color: limegreen;
+          padding: 0 10px;
+          border-radius: 10px;
+        }
+
+        &.canceled {
+          background-color: rgb(253, 115, 115);
+          padding: 0 10px;
+          border-radius: 10px;
+        }
       }
     }
   }
