@@ -17,6 +17,7 @@ import EmployeesIndexView from './app/features/employees/views/indexView';
 import SignInView from './app/features/auth/views/signinView';
 import SignUpView from './app/features/auth/views/signupView';
 import CompanyNewView from './app/features/company/views/newView';
+import EquipmentsShowView from './app/features/equipments/views/showView';
 
 function App() {
   return (
@@ -32,7 +33,10 @@ function App() {
           <Route path="/" element={<Layout />} >
             <Route path="" element={<DashboardIndexView />} />
             <Route path="orders" element={<OrdersIndexView />} />
-            <Route path="equipments" element={<EquipmentsIndexView />} />
+            <Route path="equipments">
+              <Route path="" element={<EquipmentsIndexView />} />
+              <Route path=":serialNo" element={<EquipmentsShowView />} />
+            </Route>
             <Route path="inquiries" element={<InquiriesIndexView />} />
             <Route path="quotations" element={<QuotationsIndexView />} />
             <Route path="employees" element={<EmployeesIndexView />} />

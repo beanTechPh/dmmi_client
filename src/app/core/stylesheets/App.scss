@@ -115,6 +115,20 @@ input:focus, select:focus {
   }
 }
 
+.group {
+  align-items: center;
+
+  .label {
+    font-weight: bold;
+    margin-right: 5px;
+    text-align: left;
+  }
+
+  .value {
+    text-align: left;
+  }
+}
+
 .mt-15 {
   margin-top: 15px;
 }

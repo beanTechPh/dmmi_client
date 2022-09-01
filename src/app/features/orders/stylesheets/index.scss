@@ -79,19 +79,14 @@
 
   #order-details-modal {
     .group {
-      align-items: center;
       margin-bottom: 5px;
 
       .label {
         font-size: 15px;
-        font-weight: bold;
-        margin-right: 5px;
-        text-align: left;
       }
 
       .value {
         font-size: 15px;
-        text-align: left;
 
         &.on-process {
           background-color: orange;

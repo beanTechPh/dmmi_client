@@ -28,6 +28,23 @@
         &.price {
           width: 200px;
         }
+
+        &.origin {
+          width: 200px;
+        }
+
+        &.serial-no {
+          width: 200px;
+        }
+
+        &.type {
+          width: 300px;
+          text-align: left;
+        }
+
+        &.name {
+          text-align: left;
+        }
       }
     }
   }
@@ -74,6 +91,14 @@
             background-color: rgb(253, 115, 115);
             border-radius: 10px;
           }
+        }
+
+        &.type {
+          text-align: left;
+        }
+
+        &.name {
+          text-align: left;
         }
       }
     }
