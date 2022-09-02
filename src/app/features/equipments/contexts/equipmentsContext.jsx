@@ -6,10 +6,10 @@ export const EquipmentsContext = createContext();
 
 class EquipmentsContextProvider extends Component {
   state = { 
-    equipments: Equipment.sampleData(),
+    equipments: [],
     equipmentsPage: 1,
     equipmentsTotalPage: 1,
-    showEquipment: Equipment.sampleData()[0]
+    showEquipment: null
    } 
 
   getData (config) {
@@ -29,20 +29,35 @@ class EquipmentsContextProvider extends Component {
     }
 
     config = {
-      pathname: "/inventory/products",
+      pathname: "/client/equipments",
       data: {
-        company_name: window.location.pathname.split('/')[1],
         page: page,
         keyword: keyword
       },
       dataFunction: (data) => {
-        // var products = Product.rawDataToProducts(data['products'])
-        // var productsPage = data['pagination']['page']
-        // var productsTotalPage = data['pagination']['total_page']
+        var equipments = Equipment.rawDataToEquipments(data['equipments'])
+        var equipmentsPage = data['pagination']['page']
+        var equipmentsTotalPage = data['pagination']['total_page']
         
+        this.setState({ equipments, equipmentsPage, equipmentsTotalPage })
+      },
+      errorFunction: (error) => {
+      }
+    }
+
+    getFetch(config)
+  }
+
+  getEquipment () {
+    var serialNo = window.location.pathname.split('/')[2]
+
+    var config = {
+      pathname: "/client/equipments/" + serialNo,
+      data: {},
+      dataFunction: (data) => {
+        var showEquipment = Equipment.rawDataToEquipment(data['equipment'])
         
-        // this.setState({ products, productsPage, productsTotalPage })
-        // console.log("STATE:", this.state)
+        this.setState({ showEquipment })
       },
       errorFunction: (error) => {
       }
@@ -52,7 +67,11 @@ class EquipmentsContextProvider extends Component {
   }
 
   componentDidMount(){
-    // this.getData();
+    if(window.location.pathname.split('/')[2] !== '' && window.location.pathname.split('/')[2] !== undefined){
+      this.getEquipment()
+    }else{
+      this.getData();
+    }
   }
 
   query = (config) => {
@@ -66,12 +85,7 @@ class EquipmentsContextProvider extends Component {
   }
 
   equipmentTableRowClick = (equipment) => {
-    this.setState({ showEquipment: equipment })
-    
-    // check if order details modal exist
-    if(document.querySelector("#order-details-modal") !== null){
-      document.querySelector("#order-details-modal").classList.remove('hide')
-    }
+    window.location.href = `/equipments/${equipment.serialNo}`
   }
 
   render() { 

@@ -11,6 +11,8 @@ class EquipmentsShowView extends Component {
           const { showEquipment } = context
           const equipment = showEquipment
 
+          if(equipment === null) return
+
           return (
             <div id="equipments-show-page" className='page-container'>
               <h1 className="title">{equipment.name}</h1>
@@ -30,6 +32,10 @@ class EquipmentsShowView extends Component {
                   <div className="group d-flex">
                     <div className="label">Serial No:</div>
                     <div className="value">{equipment.serialNo}</div>
+                  </div>
+                  <div className="group d-flex">
+                    <div className="label">Branch:</div>
+                    <div className="value">{equipment.branch}</div>
                   </div>
                   <div className="group d-flex">
                     <div className="label">Origin:</div>

@@ -30,11 +30,11 @@
         }
 
         &.origin {
-          width: 200px;
+          width: 100px;
         }
 
         &.serial-no {
-          width: 200px;
+          width: 150px;
         }
 
         &.type {
@@ -43,6 +43,10 @@
         }
 
         &.name {
+          text-align: left;
+        }
+
+        &.branch {
           text-align: left;
         }
       }
@@ -98,6 +102,10 @@
         }
 
         &.name {
+          text-align: left;
+        }
+
+        &.branch {
           text-align: left;
         }
       }

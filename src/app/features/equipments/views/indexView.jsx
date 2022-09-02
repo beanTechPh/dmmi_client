@@ -34,6 +34,12 @@ class EquipmentsIndexView extends Component {
                   <option value="">All Origins</option>
                 </select>
               </div>
+              <div className="group d-flex">
+                <div className="label">Branch:</div>
+                <select name="branch" id="branch-filter" className='form-select'>
+                  <option value="">All Branches</option>
+                </select>
+              </div>
             </div>
           </div>
           <table className="table data-table">
@@ -42,6 +48,7 @@ class EquipmentsIndexView extends Component {
                 <th className='name'>Name</th>
                 <th className='type'>Type</th>
                 <th className="serial-no">Serial No</th>
+                <th className="branch">Branch</th>
                 <th className='origin'>Origin</th>
               </tr>
             </thead>

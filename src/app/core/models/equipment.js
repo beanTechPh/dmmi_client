@@ -1,5 +1,5 @@
 class Equipment {
-  constructor(id, name, type, serialNo, origin, description, age){
+  constructor(id, name, type, serialNo, origin, description, age, branch){
     this.id = id
     this.name = name 
     this.type = type 
@@ -7,10 +7,11 @@ class Equipment {
     this.origin = origin
     this.description = description
     this.age = age
+    this.branch = branch
   }
 
   static rawDataToEquipment(rawData){
-    return new Equipment(rawData['id'], rawData['name'], rawData['type'], rawData['serial_no'], rawData['origin'], rawData['description'], rawData['age'])
+    return new Equipment(rawData['id'], rawData['name'], rawData['type'], rawData['serial_no'], rawData['origin'], rawData['description'], rawData['age'], rawData['branch'])
   }
 
   static rawDataToEquipments(rawData){
@@ -26,7 +27,8 @@ class Equipment {
         'serial_no': "22001",
         'origin': "Order",
         'description': "4000A, 3P, 400V, Schnieder",
-        'age': "6 years"
+        'age': "6 years",
+        'branch': 'City Mall Cotabato'
       },
       {
         'id': 2,
@@ -35,7 +37,8 @@ class Equipment {
         'serial_no': "22002",
         'origin': "Scan",
         'description': "4000A, 3P, 400V, Schnieder",
-        'age': "6 years"
+        'age': "6 years",
+        'branch': 'City Mall Danao'
       }
     ]
 

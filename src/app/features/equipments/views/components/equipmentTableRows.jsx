@@ -13,6 +13,7 @@ const EquipmentTableRows = () => {
           <td className='name'>{equipment.name}</td>
           <td className='type'>{equipment.type}</td>
           <td className="serial-no">{equipment.serialNo}</td>
+          <td className="branch">{equipment.branch}</td>
           <td className='origin'>{equipment.origin}</td>
         </tr>
       )}
