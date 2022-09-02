@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import EquipmentsContextProvider from '../contexts/equipmentsContext';
+import EquipmentsContextProvider, { EquipmentsContext } from '../contexts/equipmentsContext';
 import '../stylesheets/index.scss';
 import EquipmentTableRows from './components/equipmentTableRows';
 
@@ -14,7 +14,13 @@ class EquipmentsIndexView extends Component {
             <div className="d-flex">
               <div className="search">
                 <i className="bi bi-search"></i>
-                <input type="text" name="search" className='form-control' placeholder='Search Order No...' autoComplete='off' />
+                <EquipmentsContext.Consumer>{ context => {
+                  const { query } = context
+
+                  return (
+                    <input type="text" name="search" id='search' className='form-control' placeholder='Search Order No...' autoComplete='off' onKeyUp={e => query()} />
+                  )
+                }}</EquipmentsContext.Consumer>
               </div>
               <div className="actions d-flex justify-content-end">
                 <button className="btn btn-primary btn-sm" id='scan-equipment' onClick={null}>Scan</button>
@@ -22,24 +28,40 @@ class EquipmentsIndexView extends Component {
             </div>
 
             <div className="filters d-flex">
-              <div className="group d-flex">
-                <div className="label">Type:</div>
-                <select name="type" id="type-filter" className='form-select'>
-                  <option value="">All Types</option>
-                </select>
-              </div>
-              <div className="group d-flex">
-                <div className="label">Origin:</div>
-                <select name="origin" id="origin-filter" className='form-select'>
-                  <option value="">All Origins</option>
-                </select>
-              </div>
-              <div className="group d-flex">
-                <div className="label">Branch:</div>
-                <select name="branch" id="branch-filter" className='form-select'>
-                  <option value="">All Branches</option>
-                </select>
-              </div>
+              <EquipmentsContext.Consumer>{ context => {
+                const { types, branches, query } = context
+
+                return (
+                  <React.Fragment>
+                    <div className="group d-flex">
+                      <div className="label">Type:</div>
+                      <select name="type" id="type-filter" className='form-select' onChange={e => query()}>
+                        <option value="">All Types</option>
+                        {types.map( type => 
+                          <option key={type.name} value={type.name}>{type.name}</option>
+                        )}
+                      </select>
+                    </div>
+                    <div className="group d-flex">
+                      <div className="label">Origin:</div>
+                      <select name="origin" id="origin-filter" className='form-select' onChange={e => query()}>
+                        <option value="">All Origins</option>
+                        <option value="order">Order</option>
+                        <option value="scan">Scan</option>
+                      </select>
+                    </div>
+                    <div className="group d-flex">
+                      <div className="label">Branch:</div>
+                      <select name="branch" id="branch-filter" className='form-select' onChange={e => query()}>
+                        <option value="">All Branches</option>
+                        {branches.map( branch => 
+                          <option key={branch.name} value={branch.name}>{branch.name}</option>
+                        )}
+                      </select>
+                    </div>
+                  </React.Fragment>
+                )
+              }}</EquipmentsContext.Consumer>
             </div>
           </div>
           <table className="table data-table">

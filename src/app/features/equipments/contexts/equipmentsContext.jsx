@@ -9,6 +9,8 @@ class EquipmentsContextProvider extends Component {
     equipments: [],
     equipmentsPage: 1,
     equipmentsTotalPage: 1,
+    types: [],
+    branches: [],
     showEquipment: null
    } 
 
@@ -17,29 +19,29 @@ class EquipmentsContextProvider extends Component {
       config = {} 
     }
 
-    var page = config.page 
-    var keyword = config.keyword 
-
-    if (page === undefined){
-      page = 1  
-    }
-
-    if (keyword === undefined){
-      keyword = ""
-    }
+    var page = config.page === undefined ? 1 : config.page 
+    var keyword = config.keyword === undefined ? "" : config.keyword
+    var type_filter = config.type_filter === undefined ? "" : config.type_filter
+    var origin_filter = config.origin_filter === undefined ? "" : config.origin_filter
+    var branch_filter = config.branch_filter === undefined ? "" : config.branch_filter
 
     config = {
       pathname: "/client/equipments",
       data: {
         page: page,
-        keyword: keyword
+        keyword: keyword,
+        type_filter: type_filter,
+        origin_filter: origin_filter,
+        branch_filter: branch_filter
       },
       dataFunction: (data) => {
         var equipments = Equipment.rawDataToEquipments(data['equipments'])
         var equipmentsPage = data['pagination']['page']
         var equipmentsTotalPage = data['pagination']['total_page']
+        var types = data['types']
+        var branches = data['branches']
         
-        this.setState({ equipments, equipmentsPage, equipmentsTotalPage })
+        this.setState({ equipments, equipmentsPage, equipmentsTotalPage, types, branches })
       },
       errorFunction: (error) => {
       }
@@ -77,10 +79,12 @@ class EquipmentsContextProvider extends Component {
   query = (config) => {
     config = {
       keyword: document.querySelector("input#search").value,
+      type_filter: document.querySelector("select#type-filter").value,
+      origin_filter: document.querySelector("select#origin-filter").value,
+      branch_filter: document.querySelector("select#branch-filter").value,
       page: 1,
       ...config,
     }
-    console.log(config)
     this.getData(config)
   }
 
@@ -91,6 +95,7 @@ class EquipmentsContextProvider extends Component {
   render() { 
     var value = {
       ...this.state,
+      query: this.query,
       equipmentTableRowClick: this.equipmentTableRowClick
     }
 
