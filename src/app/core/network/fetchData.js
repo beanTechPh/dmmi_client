@@ -176,7 +176,7 @@ export const getFetch = (config) => {
     headers: SessionsManager.getHeaders()
   }).then(response => {
       if (response.ok) {
-        SessionsManager.setHeaders(response)
+        // SessionsManager.setHeaders(response)
 
         return response.json();
       }else if (response.status === 401) {

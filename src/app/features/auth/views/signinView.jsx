@@ -17,11 +17,17 @@ const SignInView = () => {
                 <input type="email" name="email" id="email" className='form-control' />
               </div>
               <div className="form-group">
-                <label htmlFor="email">Password</label>
-                <input type="email" name="email" id="email" className='form-control' />
+                <label htmlFor="password">Password</label>
+                <input type="password" name="password" id="password" className='form-control' />
               </div>
             </form>
-            <button className="btn btn-dark">Sign In</button>
+            <AuthContext.Consumer>{ context => {
+              const { submitSignIn } = context 
+
+              return (
+                <button className="btn btn-dark" onClick={submitSignIn}>Sign In</button>
+              )
+            }}</AuthContext.Consumer>
             <div className="redirect-to">
               Don't have an account? 
               <Link to={"/sign_up"}>Sign Up</Link> 

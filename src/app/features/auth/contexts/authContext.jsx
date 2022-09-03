@@ -25,7 +25,7 @@ class AuthContextProvider extends Component {
     var isValid = true
 
     // text inputs
-    var textInputs = ["#first_name", "#last_name", "#email", "#password", "#mobile_no"]
+    var textInputs = ["#first_name", "#last_name", "#email", "#password", "#mobile_no", "#address"]
     for (let i = 0; i < textInputs.length; i++) {
       const id = textInputs[i];
       
@@ -65,13 +65,14 @@ class AuthContextProvider extends Component {
       email: document.querySelector("#email").value,
       password: document.querySelector("#password").value,
       mobile_no: document.querySelector("#mobile_no").value,
+      address: document.querySelector("#address").value,
     }
 
     var config = {
-      pathname: "/user_auth",
+      pathname: "/client/staff_auth",
       data: data,
       dataFunction: (data) => {
-        window.location.href = `/sign_in`
+        window.location.href = `/`
       },
       errorFunction: (error) => {
       }
@@ -123,7 +124,7 @@ class AuthContextProvider extends Component {
     }
 
     var config = {
-      pathname: "/user_auth/sign_in",
+      pathname: "/client/staff_auth/sign_in",
       data: data,
       dataFunction: (data) => {
         window.location.href = `/`

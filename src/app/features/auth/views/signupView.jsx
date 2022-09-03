@@ -41,7 +41,13 @@ const SignUpView = () => {
                 </div>
               </div>
             </form>
-            <button className="btn btn-dark">Sign Up</button>
+            <AuthContext.Consumer>{ context => {
+              const { submitSignUp } = context 
+
+              return (
+                <button className="btn btn-dark" onClick={submitSignUp}>Sign Up</button>
+              )
+            }}</AuthContext.Consumer>
             <div className="redirect-to">
               Already have an account? 
               <Link to={"/sign_in"}>Sign In</Link> 

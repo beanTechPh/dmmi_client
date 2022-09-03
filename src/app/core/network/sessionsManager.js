@@ -16,11 +16,12 @@ class SessionsManager {
   static getHeaders () {
     var headerNames = ['access-token', 'uid', 'client']
     var headers = {}
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    ca = ca.filter(data => data.split('=')[1] != '')
 
     headerNames.forEach(header => {
       let name = header + "=";
-      let decodedCookie = decodeURIComponent(document.cookie);
-      let ca = decodedCookie.split(';');
 
       for(let i = 0; i <ca.length; i++) {
         let c = ca[i];
