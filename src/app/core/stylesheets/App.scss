@@ -29,6 +29,23 @@ html {
   border-radius: 5px;
 }
 
+.empty {
+  color: red !important;
+  border-color: red !important;
+
+  &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: red !important;
+  }
+  
+  &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: red !important;
+  }
+  
+  &::-ms-input-placeholder { /* Microsoft Edge */
+    color: red !important;
+  }
+}
+
 .page-container {
   padding: 20px;
   height: 100%;

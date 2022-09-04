@@ -51,10 +51,10 @@ class EquipmentsContextProvider extends Component {
   }
 
   getEquipment () {
-    var serialNo = window.location.pathname.split('/')[2]
+    var id = window.location.pathname.split('/')[2]
 
     var config = {
-      pathname: "/client/equipments/" + serialNo,
+      pathname: "/client/equipments/" + id,
       data: {},
       dataFunction: (data) => {
         var showEquipment = Equipment.rawDataToEquipment(data['equipment'])
@@ -89,7 +89,7 @@ class EquipmentsContextProvider extends Component {
   }
 
   equipmentTableRowClick = (equipment) => {
-    window.location.href = `/equipments/${equipment.serialNo}`
+    window.location.href = `/equipments/${equipment.id}`
   }
 
   render() { 

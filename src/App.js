@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import './app/core/stylesheets/App.scss';
 import './app/core/stylesheets/dataTable.scss';

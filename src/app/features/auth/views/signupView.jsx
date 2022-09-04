@@ -58,32 +58,6 @@ const SignUpView = () => {
 
           </div>
         </div>
-        <div className="custom-card hide">
-          <div className="title">Sign In</div>
-          <div className="form">
-            <div className="group">
-              <div className="label">Email</div>
-              <input type="email" name="email" id="email" className='form-control' />
-            </div>
-            <div className="group">
-              <div className="label">Password</div>
-              <input type="password" name="password" id="password" className='form-control' />
-            </div>
-
-            <AuthContext.Consumer>{context => {
-              const { submitSignIn } = context 
-
-              return (
-                <button className="btn btn-primary btn-sm" onClick={submitSignIn}>Sign In</button>
-              )
-            }}</AuthContext.Consumer>
-          </div>
-          <div className="sign-up-details">
-            <span>Don't have an account yet?</span>
-            <br />
-            <Link to={"/sign_up"}>Sign Up</Link>
-          </div>
-        </div>
       </div>
     </AuthContextProvider>
   )
