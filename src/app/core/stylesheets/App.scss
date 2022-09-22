@@ -21,14 +21,6 @@ html {
   display: none !important;
 }
 
-.body {
-  width: calc(100% - var(--sidebar-width));
-  height: 100%;
-  overflow: auto;
-  background-color: #f5f5f5;
-  border-radius: 5px;
-}
-
 .empty {
   color: red !important;
   border-color: red !important;
@@ -46,12 +38,21 @@ html {
   }
 }
 
+.body {
+  width: calc(100% - var(--sidebar-width));
+  height: 100%;
+  overflow: auto;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+}
+
 .page-container {
   padding: 20px;
   height: 100%;
   
   .title {
     text-align: left;
+    margin: 0;
   }
 }
 
@@ -66,6 +67,16 @@ html {
 
 h1 {
   font-size: 25px !important;
+  font-weight: bold !important;
+}
+
+h2 {
+  font-size: 23px !important;
+  font-weight: bold !important;
+}
+
+h3 {
+  font-size: 21px !important;
   font-weight: bold !important;
 }
 
@@ -128,6 +139,19 @@ input:focus, select:focus {
       &::-ms-input-placeholder { /* Microsoft Edge */
         color: skyblue !important;
       }
+    }
+  }
+
+  &.check {
+    margin-top: 10px;
+    align-items: center;
+
+    input {
+      margin: 0;
+    }
+
+    label {
+      margin-left: 10px;
     }
   }
 }

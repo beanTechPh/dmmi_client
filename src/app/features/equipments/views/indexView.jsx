@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Pagination from '../../../core/utils/pagination';
 import EquipmentsContextProvider, { EquipmentsContext } from '../contexts/equipmentsContext';
 import '../stylesheets/index.scss';
 import EquipmentTableRows from './components/equipmentTableRows';
@@ -24,7 +25,7 @@ class EquipmentsIndexView extends Component {
                 }}</EquipmentsContext.Consumer>
               </div>
               <div className="actions d-flex justify-content-end">
-                {/* <Link to="/equipments/new" className='btn btn-primary btn-sm' id='new-equipment'>New</Link> */}
+                <Link to="/equipments/new" className='btn btn-primary btn-sm' id='new-equipment'>New</Link>
               </div>
             </div>
 
@@ -43,14 +44,6 @@ class EquipmentsIndexView extends Component {
                         )}
                       </select>
                     </div>
-                    {/* <div className="group d-flex">
-                      <div className="label">Origin:</div>
-                      <select name="origin" id="origin-filter" className='form-select' onChange={e => query()}>
-                        <option value="">All Origins</option>
-                        <option value="order">Order</option>
-                        <option value="scan">Scan</option>
-                      </select>
-                    </div> */}
                     <div className="group d-flex">
                       <div className="label">Branch:</div>
                       <select name="branch" id="branch-filter" className='form-select' onChange={e => query()}>
@@ -87,6 +80,13 @@ class EquipmentsIndexView extends Component {
               <EquipmentTableRows/>
             </tbody>
           </table>
+          <EquipmentsContext.Consumer>{context => {
+            const { equipmentsPage, equipmentsTotalPage, query } = context 
+
+            return(
+              <Pagination page={equipmentsPage} totalPage={equipmentsTotalPage} query={query} />
+            )
+          }}</EquipmentsContext.Consumer>
         </div>
       </EquipmentsContextProvider>
     );

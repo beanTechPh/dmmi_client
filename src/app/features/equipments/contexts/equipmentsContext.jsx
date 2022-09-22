@@ -24,7 +24,6 @@ class EquipmentsContextProvider extends Component {
     var page = config.page === undefined ? 1 : config.page 
     var keyword = config.keyword === undefined ? "" : config.keyword
     var type_filter = config.type_filter === undefined ? "" : config.type_filter
-    // var origin_filter = config.origin_filter === undefined ? "" : config.origin_filter
     var branch_filter = config.branch_filter === undefined ? "" : config.branch_filter
     var brand_filter = config.brand_filter === undefined ? "" : config.brand_filter
 
@@ -34,8 +33,8 @@ class EquipmentsContextProvider extends Component {
         page: page,
         keyword: keyword,
         type_filter: type_filter,
-        // origin_filter: origin_filter,
-        branch_filter: branch_filter
+        branch_filter: branch_filter,
+        brand_filter: brand_filter
       },
       dataFunction: (data) => {
         var equipments = Equipment.rawDataToEquipments(data['equipments'])
@@ -43,8 +42,9 @@ class EquipmentsContextProvider extends Component {
         var equipmentsTotalPage = data['pagination']['total_page']
         var types = data['types']
         var branches = data['branches']
+        var brands = data['brands']
         
-        this.setState({ equipments, equipmentsPage, equipmentsTotalPage, types, branches })
+        this.setState({ equipments, equipmentsPage, equipmentsTotalPage, types, branches, brands })
       },
       errorFunction: (error) => {
       }
@@ -83,8 +83,7 @@ class EquipmentsContextProvider extends Component {
     config = {
       keyword: document.querySelector("input#search").value,
       type_filter: document.querySelector("select#type-filter").value,
-      // origin_filter: document.querySelector("select#origin-filter").value,
-      branch_filter: document.querySelector("select#branch-filter").value,
+      brand_filter: document.querySelector("select#brand-filter").value,
       branch_filter: document.querySelector("select#branch-filter").value,
       page: 1,
       ...config,
