@@ -3,9 +3,15 @@ import Pagination from '../../../core/utils/pagination';
 import EquipmentsContextProvider, { EquipmentsContext } from '../contexts/equipmentsContext';
 import '../stylesheets/index.scss';
 import EquipmentTableRows from './components/equipmentTableRows';
+import ScanEquipmentModal from './components/scanModal';
 
 class EquipmentsIndexView extends Component {
   state = {  } 
+
+  scanEquipment = (e) => {
+    document.querySelector("#equipment-scan-modal").classList.remove('hide')
+  }
+
   render() { 
     return (
       <EquipmentsContextProvider>
@@ -24,7 +30,7 @@ class EquipmentsIndexView extends Component {
                 }}</EquipmentsContext.Consumer>
               </div>
               <div className="actions d-flex justify-content-end">
-                <button className="btn btn-sm btn-primary">Scan</button>
+                <button className="btn btn-sm btn-primary" onClick={this.scanEquipment}>Scan</button>
               </div>
             </div>
 
@@ -86,6 +92,7 @@ class EquipmentsIndexView extends Component {
               <Pagination page={equipmentsPage} totalPage={equipmentsTotalPage} query={query} />
             )
           }}</EquipmentsContext.Consumer>
+          <ScanEquipmentModal />
         </div>
       </EquipmentsContextProvider>
     );

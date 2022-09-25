@@ -2,7 +2,7 @@ import { ApiUrl } from "../network/url"
 import EquipComponent from "./equipComponent"
 
 class Equipment {
-  constructor(id, name, type, serialNo, origin, description, age, branch, brand, images, installedDate, schematics, components){
+  constructor(id, name, type, serialNo, origin, description, age, branch, brand, images, installedDate, schematics, components, qrCode){
     this.id = id
     this.name = name 
     this.type = type 
@@ -16,6 +16,7 @@ class Equipment {
     this.installedDate = installedDate
     this.schematics = []
     this.components = components === null || components === undefined ? [] : EquipComponent.rawDataToEquipComponents(components)
+    this.qrCode = qrCode === null || qrCode === undefined ? null : (ApiUrl + qrCode)
 
     if(images !== null && images !== undefined){
       images.forEach(image => {
@@ -31,7 +32,7 @@ class Equipment {
   }
 
   static rawDataToEquipment(rawData){
-    return new Equipment(rawData['id'], rawData['name'], rawData['type'], rawData['serial_no'], rawData['origin'], rawData['description'], rawData['age'], rawData['branch'], rawData['brand'], rawData['images'], rawData['installed_date'], rawData['schematics'], rawData['components'])
+    return new Equipment(rawData['id'], rawData['name'], rawData['type'], rawData['serial_no'], rawData['origin'], rawData['description'], rawData['age'], rawData['branch'], rawData['brand'], rawData['images'], rawData['installed_date'], rawData['schematics'], rawData['components'], rawData['qr_code'])
   }
 
   static rawDataToEquipments(rawData){
