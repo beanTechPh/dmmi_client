@@ -1,5 +1,4 @@
 import React, { createContext, Component } from 'react';
-import Equipment from '../../../core/models/equipment';
 import { getFetch } from '../../../core/network/fetchData';
 
 export const DashboardContext = createContext();

@@ -72,7 +72,7 @@ class AuthContextProvider extends Component {
       pathname: "/client/staff_auth",
       data: data,
       dataFunction: (data) => {
-        window.location.href = `/`
+        window.location.href = `/company/new`
       },
       errorFunction: (error) => {
       }

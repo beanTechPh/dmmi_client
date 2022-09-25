@@ -1,12 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import FlashComponent from '../../../core/utils/flash';
+import CompanyContextProvider, { CompanyContext } from '../contexts/companyContext';
 import '../stylesheets/new.scss';
 
 const CompanyNewView = () => {
 
   return (
-    // <AuthContextProvider>
+    <CompanyContextProvider>
       <div id="company-new-page">
+        <FlashComponent/>
         <div className="custom-card company-new-box d-flex">
           <div className="form-container">
             <h1>Company Details</h1>
@@ -28,14 +30,20 @@ const CompanyNewView = () => {
                 <input type="file" name="logo" id='logo' className='form-control' />
               </div>
             </form>
-            <button className="btn btn-dark">Create</button>
+            <CompanyContext.Consumer>{context => {
+              const { createCompany } = context 
+
+              return (
+                <button className="btn btn-dark" onClick={createCompany}>Create</button>
+              )
+            }}</CompanyContext.Consumer>
           </div>
           <div className="news-container">
 
           </div>
         </div>
       </div>
-    // </AuthContextProvider>
+    </CompanyContextProvider>
   )
 }
 

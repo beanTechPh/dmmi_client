@@ -36,8 +36,8 @@ const SignUpView = () => {
                   <input type="email" name="email" id="email" className='form-control' />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="email">Password</label>
-                  <input type="email" name="email" id="email" className='form-control' />
+                  <label htmlFor="password">Password</label>
+                  <input type="password" name="password" id="password" className='form-control' />
                 </div>
               </div>
             </form>
