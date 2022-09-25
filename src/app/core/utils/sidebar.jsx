@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import SidebarContextProvider, { SidebarContext } from '../contexts/sidebarContext';
 import '../stylesheets/sidebar.scss';
 
 class SidebarComponent extends Component {
@@ -29,74 +30,82 @@ class SidebarComponent extends Component {
 
   render() { 
     return (
-      <div id="sidebar">
-        <div className="company-name">
-          <img src={require("../images/company-icon.png")} alt="" />
-          <div className="name">Double Dragon</div>
-        </div>
-        
-        <div className="section">
-          <div className="label">Company</div>
-          <div className="menu">
-            <ul>
-              <Link to={'/company'} onClick={this.sidebarMenuClick}>
-                <li className='d-flex' id='sidebar-company'>
-                  <img src={require("../images/sidebar/company-profile.png")} alt="" />
-                  Profile
-                </li>
-              </Link>
-            </ul>
+      <SidebarContextProvider>
+        <div id="sidebar">
+          <div className="company-name">
+            <img src={require("../images/company-icon.png")} alt="" />
+            <div className="name">Double Dragon</div>
           </div>
-        </div>
-        
-        <div className="section">
-          <div className="label">Menu</div>
-          <div className="menu">
-            <ul>
-              <Link to={'/'} onClick={this.sidebarMenuClick}>
-                <li className='d-flex' id='sidebar-dashboard'>
-                  <img src={require("../images/sidebar/dashboard.png")} alt="" />
-                  Dashboard
-                </li>
-              </Link>
-              <Link to={'/orders'} onClick={this.sidebarMenuClick}>
-                <li className='d-flex' id='sidebar-orders'>
-                  <img src={require("../images/sidebar/order.png")} alt="" />
-                  Orders
-                </li>
-              </Link>
-              <Link to={'/equipments'} onClick={this.sidebarMenuClick}>
-                <li className='d-flex' id='sidebar-equipments'>
-                  <img src={require("../images/sidebar/equipment.png")} alt="" />
-                  Equipment
-                </li>
-              </Link>
-              <Link to={'/inquiries'} onClick={this.sidebarMenuClick}>
-                <li className='d-flex' id='sidebar-inquiries'>
-                  <img src={require("../images/sidebar/inquiry.png")} alt="" />
-                  Inquiries
-                </li>
-              </Link>
-              <Link to={'/quotations'} onClick={this.sidebarMenuClick}>
-                <li className='d-flex' id='sidebar-quotations'>
-                  <img src={require("../images/sidebar/quotation.png")} alt="" />
-                  Quotations
-                </li>
-              </Link>
-              <Link to={'/employees'} onClick={this.sidebarMenuClick}>
-                <li className='d-flex' id='sidebar-employees'>
-                  <img src={require("../images/sidebar/personnel.png")} alt="" />
-                  Employees
-                </li>
-              </Link>
-            </ul>
+          
+          <div className="section">
+            <div className="label">Company</div>
+            <div className="menu">
+              <ul>
+                <Link to={'/company'} onClick={this.sidebarMenuClick}>
+                  <li className='d-flex' id='sidebar-company'>
+                    <img src={require("../images/sidebar/company-profile.png")} alt="" />
+                    Profile
+                  </li>
+                </Link>
+              </ul>
+            </div>
           </div>
-        </div>
+          
+          <div className="section">
+            <div className="label">Menu</div>
+            <div className="menu">
+              <ul>
+                <Link to={'/'} onClick={this.sidebarMenuClick}>
+                  <li className='d-flex' id='sidebar-dashboard'>
+                    <img src={require("../images/sidebar/dashboard.png")} alt="" />
+                    Dashboard
+                  </li>
+                </Link>
+                <Link to={'/orders'} onClick={this.sidebarMenuClick}>
+                  <li className='d-flex' id='sidebar-orders'>
+                    <img src={require("../images/sidebar/order.png")} alt="" />
+                    Orders
+                  </li>
+                </Link>
+                <Link to={'/equipments'} onClick={this.sidebarMenuClick}>
+                  <li className='d-flex' id='sidebar-equipments'>
+                    <img src={require("../images/sidebar/equipment.png")} alt="" />
+                    Equipment
+                  </li>
+                </Link>
+                <Link to={'/inquiries'} onClick={this.sidebarMenuClick}>
+                  <li className='d-flex' id='sidebar-inquiries'>
+                    <img src={require("../images/sidebar/inquiry.png")} alt="" />
+                    Inquiries
+                  </li>
+                </Link>
+                <Link to={'/quotations'} onClick={this.sidebarMenuClick}>
+                  <li className='d-flex' id='sidebar-quotations'>
+                    <img src={require("../images/sidebar/quotation.png")} alt="" />
+                    Quotations
+                  </li>
+                </Link>
+                <Link to={'/employees'} onClick={this.sidebarMenuClick}>
+                  <li className='d-flex' id='sidebar-employees'>
+                    <img src={require("../images/sidebar/personnel.png")} alt="" />
+                    Employees
+                  </li>
+                </Link>
+              </ul>
+            </div>
+          </div>
 
-        <div id="logout">
-          <button className="btn btn-primary btn-sm">Logout</button>
+          <div id="logout">
+            <SidebarContext.Consumer>{ context => {
+              const { logout } = context 
+
+              return (
+                <button className="btn btn-primary btn-sm" onClick={logout}>Logout</button>
+              )
+            }}</SidebarContext.Consumer>
+          </div>
         </div>
-      </div>
+      </SidebarContextProvider>
     );
   }
 }
