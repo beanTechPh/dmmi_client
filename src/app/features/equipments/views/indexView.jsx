@@ -25,7 +25,6 @@ class EquipmentsIndexView extends Component {
                 }}</EquipmentsContext.Consumer>
               </div>
               <div className="actions d-flex justify-content-end">
-                <Link to="/equipments/new" className='btn btn-primary btn-sm' id='new-equipment'>New</Link>
               </div>
             </div>
 
