@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import Pagination from '../../../core/utils/pagination';
 import EquipmentsContextProvider, { EquipmentsContext } from '../contexts/equipmentsContext';
 import '../stylesheets/index.scss';
@@ -20,11 +19,12 @@ class EquipmentsIndexView extends Component {
                   const { query } = context
 
                   return (
-                    <input type="text" name="search" id='search' className='form-control' placeholder='Search Order No...' autoComplete='off' onKeyUp={e => query()} />
+                    <input type="text" name="search" id='search' className='form-control' placeholder='Search Equipment...' autoComplete='off' onKeyUp={e => query()} />
                   )
                 }}</EquipmentsContext.Consumer>
               </div>
               <div className="actions d-flex justify-content-end">
+                <button className="btn btn-sm btn-primary">Scan</button>
               </div>
             </div>
 

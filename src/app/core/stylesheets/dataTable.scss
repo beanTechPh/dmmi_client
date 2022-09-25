@@ -49,6 +49,19 @@
         &.branch {
           text-align: left;
         }
+
+        &.email {
+          text-align: left;
+          width: 300px;
+        }
+
+        &.mobile-no {
+          width: 120px;
+        }
+
+        &.address {
+          width: 300px;
+        }
       }
     }
   }
@@ -125,6 +138,10 @@
         }
 
         &.branch {
+          text-align: left;
+        }
+
+        &.email {
           text-align: left;
         }
       }
