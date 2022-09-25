@@ -32,10 +32,25 @@ class SidebarComponent extends Component {
     return (
       <SidebarContextProvider>
         <div id="sidebar">
-          <div className="company-name">
-            <img src={require("../images/company-icon.png")} alt="" />
-            <div className="name">Double Dragon</div>
-          </div>
+            <SidebarContext.Consumer>{ context => {
+              const { company } = context 
+
+              if(company !== null){
+                return (
+                  <div className="company-name">
+                    <img src={company.logo} alt="" />
+                    <div className="name">{company.name}</div>
+                  </div>
+                )
+              }else{
+                return (
+                  <div className="company-name">
+                    <img src={require("../images/company-icon.png") } alt="" />
+                    <div className="name">Loading...</div>
+                  </div>
+                )
+              }
+            }}</SidebarContext.Consumer>
           
           <div className="section">
             <div className="label">Company</div>
