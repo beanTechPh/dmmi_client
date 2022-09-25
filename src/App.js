@@ -17,8 +17,13 @@ import SignInView from './app/features/auth/views/signinView';
 import SignUpView from './app/features/auth/views/signupView';
 import CompanyNewView from './app/features/company/views/newView';
 import EquipmentsShowView from './app/features/equipments/views/showView';
+import { useEffect } from 'react';
 
 function App() {
+  useEffect(() => {
+    document.title = 'DMMI System';
+  });
+
   return (
     <Router>
       <div className="App">
