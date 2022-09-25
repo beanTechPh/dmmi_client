@@ -1,12 +1,38 @@
 import React, { createContext, Component } from 'react';
-import { postFetch } from '../../../core/network/fetchData';
+import { getFetch, postFetch } from '../../../core/network/fetchData';
 import FlashManager from '../../../core/functions/flashManager';
+import Company from '../../../core/models/company';
 
 export const CompanyContext = createContext();
 
 class CompanyContextProvider extends Component {
   state = { 
+    company: null
   } 
+
+  getData (config) {
+    if (config === undefined){
+      config = {} 
+    }
+
+    config = {
+      pathname: "/client/companies/profile",
+      data: {},
+      dataFunction: (data) => {
+        var company = Company.rawDataToCompany(data['company'])
+
+        this.setState({ company })
+      },
+      errorFunction: (error) => {
+      }
+    }
+
+    getFetch(config)
+  }
+
+  componentDidMount(){
+    this.getData();
+  }
 
   createCompany = () => {
     var isValid = true
