@@ -1,6 +1,7 @@
 import React, { createContext, Component } from 'react';
+import { textValidation } from '../../../core/functions/validation';
 import Equipment from '../../../core/models/equipment';
-import { getFetch } from '../../../core/network/fetchData';
+import { getFetch, postFetch } from '../../../core/network/fetchData';
 
 export const EquipmentsContext = createContext();
 
@@ -95,11 +96,48 @@ class EquipmentsContextProvider extends Component {
     window.location.href = `/equipments/${equipment.id}`
   }
 
+  submitTechSupp = (e, equipment) => {
+    e.preventDefault()
+    var isValid = true
+    var modal = document.querySelector("#equipment-techsupp-modal")
+
+    // text inputs
+    var textInputs = ["#equipment-techsupp-modal textarea[name='body']"]
+    isValid = textValidation(textInputs)
+
+    if(!isValid){
+      return false
+    }
+
+    // get form data
+    var data = {
+      body: modal.querySelector("textarea[name='body']").value,
+      equipment_id: equipment.id
+    }
+    
+    var config = {
+      pathname: "/client/inquiries/tech_support",
+      data: data,
+      dataFunction: (data) => {
+        modal.querySelector(".content").classList.add('hide')
+        modal.querySelector(".error-content").classList.add('hide')
+        modal.querySelector(".success-content").classList.remove('hide')
+      },
+      errorFunction: (error) => {
+        modal.querySelector(".content").classList.add('hide')
+        modal.querySelector(".error-content").classList.remove('hide')
+        modal.querySelector(".success-content").classList.add('hide')
+      }
+    }
+    postFetch(config)
+  }
+
   render() { 
     var value = {
       ...this.state,
       query: this.query,
-      equipmentTableRowClick: this.equipmentTableRowClick
+      equipmentTableRowClick: this.equipmentTableRowClick,
+      submitTechSupp: this.submitTechSupp
     }
 
     return (

@@ -3,9 +3,15 @@ import EquipmentsContextProvider, { EquipmentsContext } from '../contexts/equipm
 import '../stylesheets/show.scss';
 import Carousel from 'react-bootstrap/Carousel';
 import ComponentCard from './components/componentCard';
+import TechSuppModal from './components/techSuppModal';
 
 class EquipmentsShowView extends Component {
   state = {  } 
+
+  techSupp = (e) => {
+    document.querySelector("#equipment-techsupp-modal").classList.remove('hide')
+  }
+
   render() { 
     return (
       <EquipmentsContextProvider>
@@ -20,7 +26,7 @@ class EquipmentsShowView extends Component {
               <div className="d-flex justify-content-between">
                 <h1 className="title">{equipment.name}</h1>
                 <div className="action-btns">
-                  <button className="btn btn-primary btn-sm">Tech Support</button>
+                  <button className="btn btn-primary btn-sm" onClick={this.techSupp}>Tech Support</button>
                 </div>
               </div>
               <div className="d-flex justify-content-between">
@@ -113,6 +119,7 @@ class EquipmentsShowView extends Component {
               <div className="documentation">
 
               </div>
+              <TechSuppModal equipment={equipment} />
             </div>
           )
         }}</EquipmentsContext.Consumer>

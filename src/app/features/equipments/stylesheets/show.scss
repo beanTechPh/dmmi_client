@@ -155,4 +155,18 @@
       }
     }
   }
+
+  #equipment-techsupp-modal {
+    .caption {
+      margin-left: 10px;
+      text-align: left;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    textarea {
+      resize: none;
+      height: 250px;
+    }
+  }
 }
