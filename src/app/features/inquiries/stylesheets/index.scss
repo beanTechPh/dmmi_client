@@ -60,4 +60,11 @@
   .table {
     margin-top: 20px;
   }
+
+  #equipment-create-modal {
+    textarea {
+      resize: none;
+      height: 250px;
+    }
+  }
 }

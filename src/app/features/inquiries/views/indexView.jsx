@@ -3,9 +3,15 @@ import Pagination from '../../../core/utils/pagination';
 import InquiriesContextProvider, { InquiriesContext } from '../contexts/inquiriesContext';
 import InquiryTableRows from './components/inquiryTableRows';
 import "../stylesheets/index.scss";
+import InquiryCreateModal from './components/inquiryCreateModal';
 
 class InquiriesIndexView extends Component {
   state = {  } 
+
+  inquire = (e) => {
+    document.querySelector("#equipment-create-modal").classList.remove('hide')
+  }
+
   render() { 
     return (
       <InquiriesContextProvider>
@@ -24,7 +30,7 @@ class InquiriesIndexView extends Component {
                 }}</InquiriesContext.Consumer>
               </div>
               <div className="actions d-flex justify-content-end">
-                <button className="btn btn-sm btn-primary">Inquire</button>
+                <button className="btn btn-sm btn-primary" onClick={this.inquire}>Inquire</button>
               </div>
             </div>
           </div>
@@ -48,6 +54,7 @@ class InquiriesIndexView extends Component {
               <Pagination page={inquiriesPage} totalPage={inquiriesTotalPage} query={query} />
             )
           }}</InquiriesContext.Consumer>
+          <InquiryCreateModal/>
         </div>
       </InquiriesContextProvider>
     );
