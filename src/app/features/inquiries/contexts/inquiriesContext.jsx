@@ -13,10 +13,20 @@ class InquiriesContextProvider extends Component {
     inquiriesPage: 1,
     inquiriesTotalPage: 1,
     company: null,
+    inquiry: null,
     messages: [],
     messagesPage: 1,
-   } 
+  } 
 
+  componentDidMount(){
+    if(window.location.pathname.split('/')[2] !== '' && window.location.pathname.split('/')[2] !== undefined){
+      this.getMessages()
+    }else{
+      this.getData();
+    }
+  }
+
+  // INQUIRIES
   getData (config) {
     if (config === undefined){
       config = {} 
@@ -43,42 +53,6 @@ class InquiriesContextProvider extends Component {
     }
 
     getFetch(config)
-  }
-
-  getMessages (config) {
-    if (config === undefined){
-      config = {} 
-    }
-
-    var page = config.page === undefined ? 1 : config.page 
-    var inquiryId = window.location.pathname.split('/')[2]
-
-    config = {
-      pathname: "/client/messages",
-      data: {
-        page: page,
-        inquiry_id: inquiryId,
-      },
-      dataFunction: (data) => {
-        var company = Company.rawDataToCompany(data['company'])
-        var messages = Message.rawDataToMessages(data['messages'])
-        var messagesPage = data['pagination']['page']
-        
-        this.setState({ messages, messagesPage, company })
-      },
-      errorFunction: (error) => {
-      }
-    }
-
-    getFetch(config)
-  }
-
-  componentDidMount(){
-    if(window.location.pathname.split('/')[2] !== '' && window.location.pathname.split('/')[2] !== undefined){
-      this.getMessages()
-    }else{
-      this.getData();
-    }
   }
 
   query = (config) => {
@@ -131,12 +105,71 @@ class InquiriesContextProvider extends Component {
     window.location.href = `/inquiries/${inquiry.id}`
   }
 
+  // MESSAGES
+  getMessages (config) {
+    if (config === undefined){
+      config = {} 
+    }
+
+    var page = config.page === undefined ? 1 : config.page 
+    var inquiryId = window.location.pathname.split('/')[2]
+
+    config = {
+      pathname: "/client/messages",
+      data: {
+        page: page,
+        inquiry_id: inquiryId,
+      },
+      dataFunction: (data) => {
+        var company = Company.rawDataToCompany(data['company'])
+        var inquiry = Inquiry.rawDataToInquiry(data['inquiry'])
+        var messages = Message.rawDataToMessages(data['messages'])
+        var messagesPage = data['pagination']['page']
+        
+        this.setState({ messages, messagesPage, company, inquiry })
+      },
+      errorFunction: (error) => {
+      }
+    }
+
+    getFetch(config)
+  }
+
+  submitMessage = (e) => {
+    if(e.type === "keyup" && e.key !== "Enter") return 
+
+    var input = document.querySelector("#inquiries-show-page #message")
+
+    if(input.value === "") return 
+
+    // get form data
+    var data = {
+      body: input.value,
+      inquiry_id: this.state.inquiry.id,
+    }
+    
+    var config = {
+      pathname: "/client/messages",
+      data: data,
+      dataFunction: (data) => {
+        var messages = [...this.state.messages, Message.rawDataToMessage(data['message'])]
+        input.value = ""
+
+        this.setState({ messages })
+      },
+      errorFunction: (error) => {
+      }
+    }
+    postFetch(config)
+  }
+
   render() { 
     var value = {
       ...this.state,
       query: this.query,
       submitInquiry: this.submitInquiry,
-      inquiryTableRowClick: this.inquiryTableRowClick
+      inquiryTableRowClick: this.inquiryTableRowClick,
+      submitMessage: this.submitMessage
     }
 
     return (

@@ -17,7 +17,15 @@ class InquiriesShowView extends Component {
       <InquiriesContextProvider>
         <div id="inquiries-show-page" className='page-container'>
           <div className="header">
-            <h1 className="title">Inquiries</h1>
+            <InquiriesContext.Consumer>{context => {
+              const { inquiry } = context
+
+              if(inquiry === null) return 
+
+              return (
+                <h1 className="title">{inquiry.subject}</h1>
+              )
+            }}</InquiriesContext.Consumer>
           </div>
           <div className="content">
             <InquiriesContext.Consumer>{context => {
@@ -33,10 +41,18 @@ class InquiriesShowView extends Component {
             }}</InquiriesContext.Consumer>
           </div>
           <div className="footer d-flex justify-content-center">
-            <div className="form-group">
-              <input type="text" name="message" id="message" className='form-control' placeholder='Send Message ...'/>
-            </div>
-            <button className="btn btn-primary btn-sm" id='send'>Send</button>
+            <InquiriesContext.Consumer>{context => {
+              const { submitMessage } = context
+
+              return (
+                <React.Fragment>
+                  <div className="form-group">
+                    <input type="text" name="message" id="message" className='form-control' placeholder='Send Message ...' onKeyUp={submitMessage}/>
+                  </div>
+                  <button className="btn btn-primary btn-sm" id='send' onClick={submitMessage}>Send</button>
+                </React.Fragment>
+              )
+            }}</InquiriesContext.Consumer>
           </div>
         </div>
       </InquiriesContextProvider>
