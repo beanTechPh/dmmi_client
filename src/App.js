@@ -18,6 +18,7 @@ import SignUpView from './app/features/auth/views/signupView';
 import CompanyNewView from './app/features/company/views/newView';
 import EquipmentsShowView from './app/features/equipments/views/showView';
 import { useEffect } from 'react';
+import InquiriesShowView from './app/features/inquiries/views/showView';
 
 function App() {
   useEffect(() => {
@@ -41,7 +42,10 @@ function App() {
               <Route path="" element={<EquipmentsIndexView />} />
               <Route path=":serialNo" element={<EquipmentsShowView />} />
             </Route>
-            <Route path="inquiries" element={<InquiriesIndexView />} />
+            <Route path="inquiries">
+              <Route path="" element={<InquiriesIndexView />} />
+              <Route path=":id" element={<InquiriesShowView />} />
+            </Route>
             <Route path="quotations" element={<QuotationsIndexView />} />
             <Route path="employees" element={<EmployeesIndexView />} />
 

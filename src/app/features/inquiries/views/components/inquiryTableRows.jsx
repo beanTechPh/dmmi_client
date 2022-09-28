@@ -4,13 +4,13 @@ import { InquiriesContext } from '../../contexts/inquiriesContext';
 
 const InquiryTableRows = () => {
   const context = useContext( InquiriesContext );
-  const { inquiries } = context;
+  const { inquiries, inquiryTableRowClick } = context;
 
   if(inquiries.length > 0){
     return (
       <React.Fragment>
         {inquiries.map( inquiry => 
-          <tr key={inquiry.id}>
+          <tr key={inquiry.id} onClick={e => inquiryTableRowClick(inquiry)}>
             <td className='date'>{inquiry.date}</td>
             <td className='subject'>{inquiry.subject}</td>
             <td className='last-message'>{inquiry.lastMessage.body}</td>

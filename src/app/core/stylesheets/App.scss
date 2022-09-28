@@ -121,6 +121,7 @@ input:focus, select:focus {
     border-bottom: 1px solid rgba(0,0,0,0.2);
     border-radius: 0;
     font-size: 15px;
+    background-color: transparent;
 
     &:focus-visible {
       outline: none;

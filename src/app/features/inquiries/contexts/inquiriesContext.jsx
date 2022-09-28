@@ -1,6 +1,8 @@
 import React, { createContext, Component } from 'react';
 import { textValidation } from '../../../core/functions/validation';
+import Company from '../../../core/models/company';
 import Inquiry from '../../../core/models/inquiry';
+import Message from '../../../core/models/message';
 import { getFetch, postFetch } from '../../../core/network/fetchData';
 
 export const InquiriesContext = createContext();
@@ -10,6 +12,9 @@ class InquiriesContextProvider extends Component {
     inquiries: [],
     inquiriesPage: 1,
     inquiriesTotalPage: 1,
+    company: null,
+    messages: [],
+    messagesPage: 1,
    } 
 
   getData (config) {
@@ -40,8 +45,40 @@ class InquiriesContextProvider extends Component {
     getFetch(config)
   }
 
+  getMessages (config) {
+    if (config === undefined){
+      config = {} 
+    }
+
+    var page = config.page === undefined ? 1 : config.page 
+    var inquiryId = window.location.pathname.split('/')[2]
+
+    config = {
+      pathname: "/client/messages",
+      data: {
+        page: page,
+        inquiry_id: inquiryId,
+      },
+      dataFunction: (data) => {
+        var company = Company.rawDataToCompany(data['company'])
+        var messages = Message.rawDataToMessages(data['messages'])
+        var messagesPage = data['pagination']['page']
+        
+        this.setState({ messages, messagesPage, company })
+      },
+      errorFunction: (error) => {
+      }
+    }
+
+    getFetch(config)
+  }
+
   componentDidMount(){
-    this.getData();
+    if(window.location.pathname.split('/')[2] !== '' && window.location.pathname.split('/')[2] !== undefined){
+      this.getMessages()
+    }else{
+      this.getData();
+    }
   }
 
   query = (config) => {
@@ -90,11 +127,16 @@ class InquiriesContextProvider extends Component {
     postFetch(config)
   }
 
+  inquiryTableRowClick = (inquiry) => {
+    window.location.href = `/inquiries/${inquiry.id}`
+  }
+
   render() { 
     var value = {
       ...this.state,
       query: this.query,
-      submitInquiry: this.submitInquiry
+      submitInquiry: this.submitInquiry,
+      inquiryTableRowClick: this.inquiryTableRowClick
     }
 
     return (
