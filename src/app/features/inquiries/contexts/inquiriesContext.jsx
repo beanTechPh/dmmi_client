@@ -12,7 +12,6 @@ class InquiriesContextProvider extends Component {
     inquiries: [],
     inquiriesPage: 1,
     inquiriesTotalPage: 1,
-    company: null,
     inquiry: null,
     messages: [],
     messagesPage: 1,
@@ -121,12 +120,11 @@ class InquiriesContextProvider extends Component {
         inquiry_id: inquiryId,
       },
       dataFunction: (data) => {
-        var company = Company.rawDataToCompany(data['company'])
         var inquiry = Inquiry.rawDataToInquiry(data['inquiry'])
         var messages = Message.rawDataToMessages(data['messages'])
         var messagesPage = data['pagination']['page']
         
-        this.setState({ messages, messagesPage, company, inquiry })
+        this.setState({ messages, messagesPage, inquiry })
       },
       errorFunction: (error) => {
       }

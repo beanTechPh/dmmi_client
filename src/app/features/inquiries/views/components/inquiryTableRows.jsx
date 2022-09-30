@@ -15,7 +15,7 @@ const InquiryTableRows = () => {
             <td className='subject'>{inquiry.subject}</td>
             <td className='last-message'>{inquiry.lastMessage.body}</td>
             <td className="num-unread">
-              <div className={inquiry.numUnread === "0" ? '' : 'active'}>
+              <div className={inquiry.numUnread === 0 ? '' : 'active'}>
                 {inquiry.numUnread}
               </div>
             </td>

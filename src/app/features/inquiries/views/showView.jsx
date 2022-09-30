@@ -29,12 +29,12 @@ class InquiriesShowView extends Component {
           </div>
           <div className="content">
             <InquiriesContext.Consumer>{context => {
-              const { messages, company } = context
+              const { messages, inquiry } = context
 
               return (
                 <React.Fragment>
                   {messages.map(message => 
-                    <MessageCard key={message.id} side={message.userType === "Staff" ? "right" : "left"} message={message} company={company} /> 
+                    <MessageCard key={message.id} side={message.userType === "Staff" ? "right" : "left"} message={message} company={inquiry.company} /> 
                   )}
                 </React.Fragment>
               )
